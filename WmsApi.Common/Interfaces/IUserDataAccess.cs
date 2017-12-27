@@ -3,8 +3,9 @@ using WmsApi.Common.Models;
 
 namespace WmsApi.Common.Interfaces
 {
-    public interface IProjectBusiness
+    public interface IUserDataAccess
     {
-        ICollection<Project> GetProjects();
+        ICollection<User> GetUsers();
+        User GetUserByName(string name);
     }
 }

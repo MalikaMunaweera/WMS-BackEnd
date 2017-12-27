@@ -1,7 +1,10 @@
-﻿namespace WmsApi.Interfaces.Common
+﻿using System.Collections.Generic;
+using WmsApi.Common.Models;
+
+namespace WmsApi.Common.Interfaces
 {
     public interface IProjectDataAccess
     {
-        string GetProjects();
+        ICollection<Project> GetProjects();
     }
 }

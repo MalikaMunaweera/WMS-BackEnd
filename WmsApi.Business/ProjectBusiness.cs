@@ -1,4 +1,6 @@
-﻿using WmsApi.Interfaces.Common;
+﻿using System.Collections.Generic;
+using WmsApi.Common.Interfaces;
+using WmsApi.Common.Models;
 
 namespace WmsApi.Business
 {
@@ -11,7 +13,7 @@ namespace WmsApi.Business
             this.dataAccess = projectDataAccess;
         }
 
-        public string GetProjects()
+        public ICollection<Project> GetProjects()
         {
             return dataAccess.GetProjects();
         }

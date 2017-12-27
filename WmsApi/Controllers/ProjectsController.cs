@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using WmsApi.Interfaces.Common;
+using WmsApi.Common.Models;
+using WmsApi.Common.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,13 +16,14 @@ namespace WmsApi.Controllers
         {
             this.project = project;
         }
+
         // GET: api/values
         [HttpGet]
         [Route("GetProjects")]
-        public IEnumerable<string> Get()
+        public ICollection<Project> Get()
         {
-            var a = project.GetProjects();
-            return new string[] { "project1", a };
+            //var a = project.GetProjects();
+            return project.GetProjects();
         }
 
         // GET api/values/5

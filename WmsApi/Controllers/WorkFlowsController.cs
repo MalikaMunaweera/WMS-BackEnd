@@ -1,17 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using WmsApi.Common.Interfaces;
+using WmsApi.Common.Models;
 
 namespace WmsApi.Controllers
 {
     [Route("api/WorkFlows")]
     public class WorkFlowsController : Controller
     {
+        private IWorkFlowBusiness workFloor;
+
+        public WorkFlowsController(IWorkFlowBusiness workFloor)
+        {
+            this.workFloor = workFloor;
+        }
+
         // GET api/values
         [HttpGet]
         [Route("GetWorkFlows")]
-        public IEnumerable<string> Get()
+        public ICollection<WorkFlow> Get()
         {
-            return new string[] { "value1", "value2" };
+            return workFloor.GetWorkFlows();
         }
 
         // GET api/values/5
@@ -24,8 +33,10 @@ namespace WmsApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("AddWorkFlow")]
+        public int Post([FromBody]WorkFlow value)
         {
+            return workFloor.AddWorkFlow(value);
         }
 
         // PUT api/values/5
