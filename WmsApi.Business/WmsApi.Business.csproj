@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WmsApi.Common\WmsApi.Common.csproj" />
+    <ProjectReference Include="..\WmsApi.Data\WmsApi.Data.csproj" />
+  </ItemGroup>
+
+</Project>
