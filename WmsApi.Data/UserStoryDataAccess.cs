@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using WmsApi.Data.Entities;
 using WmsApi.Common.Interfaces;
 using WmsApi.Common.Models;
+using WmsApi.Data.Entities;
 
 namespace WmsApi.Data
 {
@@ -20,11 +21,11 @@ namespace WmsApi.Data
                 Activity = userStory.Activity,
                 BusinessValue = userStory.BusinessValue,
                 AcceptanceCriteria = userStory.AcceptanceCriteria,
-                CreatedDate = userStory.CreatedDate,
-                Creator = userStory.Creator,
-                LastModified = userStory.LastModified,
-                ModifiedBy = userStory.ModifiedBy,
-                Project = userStory.Project,
+                CreatedDate = DateTime.Now,
+                Creator = userStory.CreatedBy.Id,
+                LastModified = DateTime.Now,
+                ModifiedBy = userStory.ModifiedBy.Id,
+                Project = userStory.Project.Id,
                 ApprovalStatus = userStory.ApprovalStatus
             };
             db.UserStory.Add(US);
@@ -43,10 +44,10 @@ namespace WmsApi.Data
                 BusinessValue = userStory.BusinessValue,
                 AcceptanceCriteria = userStory.AcceptanceCriteria,
                 CreatedDate = userStory.CreatedDate,
-                Creator = userStory.Creator,
+                CreatedBy = db.Employee.Select(s => new User { Id = s.Id, FirstName = s.FirstName, LastName = s.LastName, Designation = s.Designation, Email = s.Email }).FirstOrDefault(u => u.Id == userStory.Creator),//new User { Id = userStory.Creator ?? 0 },
                 LastModified = userStory.LastModified,
-                ModifiedBy = userStory.ModifiedBy,
-                Project = userStory.Project,
+                ModifiedBy = db.Employee.Select(s => new User { Id = s.Id, FirstName = s.FirstName, LastName = s.LastName, Designation = s.Designation, Email = s.Email }).FirstOrDefault(u => u.Id == userStory.ModifiedBy),//new User { Id = userStory.ModifiedBy ?? 0 },
+                Project = db.Project.Select(s => new Common.Models.Project { Id = s.Id, Name = s.Name }).FirstOrDefault(p => p.Id == userStory.Project),//userStory.Project,
                 ApprovalStatus = userStory.ApprovalStatus
             }).ToList();
         }

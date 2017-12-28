@@ -5,6 +5,11 @@ namespace WmsApi.Data.Entities
 {
     public partial class UserStory
     {
+        public UserStory()
+        {
+            WorkflowExecution = new HashSet<WorkflowExecution>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string UserType { get; set; }
@@ -19,7 +24,8 @@ namespace WmsApi.Data.Entities
         public string ApprovalStatus { get; set; }
 
         public Employee CreatorNavigation { get; set; }
-        public Employee IdNavigation { get; set; }
+        public Employee ModifiedByNavigation { get; set; }
         public Project ProjectNavigation { get; set; }
+        public ICollection<WorkflowExecution> WorkflowExecution { get; set; }
     }
 }

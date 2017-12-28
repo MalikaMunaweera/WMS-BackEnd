@@ -5,6 +5,12 @@ namespace WmsApi.Data.Entities
 {
     public partial class Workflow
     {
+        public Workflow()
+        {
+            WorkflowActivity = new HashSet<WorkflowActivity>();
+            WorkflowExecution = new HashSet<WorkflowExecution>();
+        }
+
         public int Id { get; set; }
         public double Version { get; set; }
         public string Name { get; set; }
@@ -13,5 +19,7 @@ namespace WmsApi.Data.Entities
         public bool? IsActive { get; set; }
 
         public Employee CreatedByNavigation { get; set; }
+        public ICollection<WorkflowActivity> WorkflowActivity { get; set; }
+        public ICollection<WorkflowExecution> WorkflowExecution { get; set; }
     }
 }

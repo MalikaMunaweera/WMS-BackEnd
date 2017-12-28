@@ -9,7 +9,9 @@ namespace WmsApi.Data.Entities
         {
             ProjectAllocations = new HashSet<ProjectAllocations>();
             UserStoryCreatorNavigation = new HashSet<UserStory>();
+            UserStoryModifiedByNavigation = new HashSet<UserStory>();
             Workflow = new HashSet<Workflow>();
+            WorkflowExecution = new HashSet<WorkflowExecution>();
         }
 
         public int Id { get; set; }
@@ -19,9 +21,10 @@ namespace WmsApi.Data.Entities
         public string Email { get; set; }
 
         public Designation DesignationNavigation { get; set; }
-        public UserStory UserStoryIdNavigation { get; set; }
         public ICollection<ProjectAllocations> ProjectAllocations { get; set; }
         public ICollection<UserStory> UserStoryCreatorNavigation { get; set; }
+        public ICollection<UserStory> UserStoryModifiedByNavigation { get; set; }
         public ICollection<Workflow> Workflow { get; set; }
+        public ICollection<WorkflowExecution> WorkflowExecution { get; set; }
     }
 }

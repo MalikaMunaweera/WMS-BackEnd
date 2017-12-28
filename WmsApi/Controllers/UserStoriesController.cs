@@ -35,6 +35,7 @@ namespace WmsApi.Controllers
 
         // POST api/values
         [HttpPost]
+        [Route("AddUserStory")]
         public int Post([FromBody]UserStory value)
         {
             return userStory.AddUserStory(value);

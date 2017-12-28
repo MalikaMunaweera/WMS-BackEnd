@@ -11,10 +11,10 @@ namespace WmsApi.Common.Models
         public string BusinessValue { get; set; }
         public string AcceptanceCriteria { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public int? Creator { get; set; }
+        public User CreatedBy { get; set; }
         public DateTime? LastModified { get; set; }
-        public int? ModifiedBy { get; set; }
-        public int? Project { get; set; }
+        public User ModifiedBy { get; set; }
+        public Project Project { get; set; }
         public string ApprovalStatus { get; set; }
     }
 }
