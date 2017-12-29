@@ -267,7 +267,7 @@ namespace WmsApi.Data.Entities
                     .WithMany(p => p.WorkflowExecution)
                     .HasForeignKey(d => new { d.Workflow, d.WorkflowVersion })
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WorkflowExecution_Workflow");
+                    .HasConstraintName("FK_WorkflowExecution_Workflow1");
             });
         }
     }

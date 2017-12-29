@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace WmsApi.Common.Models
 {
@@ -13,6 +12,5 @@ namespace WmsApi.Common.Models
         public string OutCome { get; set; }
         public string Comments { get; set; }
         public DateTime? CompletedDate { get; set; }
-        public User CompletedBy { get; set; }
     }
 }

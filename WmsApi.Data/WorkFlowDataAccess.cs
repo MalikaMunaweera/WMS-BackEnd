@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using WmsApi.Data.Entities;
 using WmsApi.Common.Interfaces;
 using WmsApi.Common.Models;
-using System;
+using WmsApi.Data.Entities;
 
 namespace WmsApi.Data
 {
@@ -52,12 +52,12 @@ namespace WmsApi.Data
                         WorkflowVersion = a.WorkflowVersion,
                         Name = a.Name,
                         ActivityOrderNumber = a.ActivityOrderNumber,
-                        Fields = a.WorkflowActivityField.Select(f => 
+                        Fields = a.WorkflowActivityField.Select(f =>
                             new Common.Models.WorkflowActivityField
                             {
                                 Id = f.Id,
                                 Activity = f.Activity,
-                                Type = db.WorkflowActivityFieldType.Select(ft=> new ActivityFieldType { Id = ft.Id, ActivityType=ft.ActivityType, DataType=ft.DataType, Name=ft.Name }).FirstOrDefault(at => at.Id == f.Type),
+                                Type = db.WorkflowActivityFieldType.Select(ft => new ActivityFieldType { Id = ft.Id, ActivityType = ft.ActivityType, DataType = ft.DataType, Name = ft.Name }).FirstOrDefault(at => at.Id == f.Type),
                                 Value = f.Value
                             }).ToList()
                     }).ToList()
@@ -75,7 +75,7 @@ namespace WmsApi.Data
                 CreatedBy = db.Employee.Select(s => new User { Id = s.Id, FirstName = s.FirstName, LastName = s.LastName, Designation = s.Designation, Email = s.Email }).FirstOrDefault(u => u.Id == workFlow.CreatedBy),
                 IsActive = workFlow.IsActive,
                 Activities = workFlow.WorkflowActivity.Select(s => new Common.Models.WorkflowActivity { Id = s.Id, Type = new ActivityType { Id = s.Type }, Workflow = s.Workflow, WorkflowVersion = s.WorkflowVersion, Name = s.Name, ActivityOrderNumber = s.ActivityOrderNumber }).ToList()
-            }).FirstOrDefault(w=>w.Id == id);
+            }).FirstOrDefault(w => w.Id == id);
         }
 
         public int AddWorkFlow(Common.Models.WorkFlow workFlow)
@@ -117,15 +117,15 @@ namespace WmsApi.Data
             Entities.WorkflowExecution WFE = new Entities.WorkflowExecution
             {
                 Id = execution.Id,
-                Workflow = execution.Workflow,
-                WorkflowVersion = execution.WorkflowVersion,
-                UserStory = execution.UserStory,
+                Workflow = execution.Workflow.Id,
+                WorkflowVersion = execution.Workflow.Version,
+                UserStory = execution.UserStory.Id,
                 StartDate = DateTime.Now,
                 Status = execution.Status,
                 Progress = execution.Progress,
                 InitiatedBy = execution.InitiatedBy.Id,
                 //EndDate = DateTime.Now,
-                WorkflowActivityExecution = execution.ActivityExecutions.Select(s=>
+                WorkflowActivityExecution = execution.ActivityExecutions.Select(s =>
                     new WorkflowActivityExecution
                     {
                         Id = s.Id,
@@ -145,7 +145,7 @@ namespace WmsApi.Data
 
         public int CompleteWorkFlowExecution(Common.Models.WorkflowExecution execution)
         {
-            Entities.WorkflowExecution WFE = db.WorkflowExecution.FirstOrDefault(e=>e.Id==execution.Id);
+            Entities.WorkflowExecution WFE = db.WorkflowExecution.FirstOrDefault(e => e.Id == execution.Id);
 
             WFE.Status = execution.Status;
             WFE.Progress = execution.Progress;
@@ -159,7 +159,7 @@ namespace WmsApi.Data
 
         public int UpdateWorkFlow(Common.Models.WorkFlow workFlow)
         {
-            Entities.Workflow WF = db.Workflow.FirstOrDefault(w=>w.Id == workFlow.Id);
+            Entities.Workflow WF = db.Workflow.FirstOrDefault(w => w.Id == workFlow.Id);
 
             WF.IsActive = workFlow.IsActive;
 
@@ -185,7 +185,7 @@ namespace WmsApi.Data
             {
                 Id = activityType.Id,
                 Name = activityType.Name,
-                FieldTypes = activityType.WorkflowActivityFieldType.Select(s=>new Common.Models.ActivityFieldType { Id = s.Id, ActivityType=s.ActivityType, Name=s.Name, DataType=s.DataType }).ToList()
+                FieldTypes = activityType.WorkflowActivityFieldType.Select(s => new Common.Models.ActivityFieldType { Id = s.Id, ActivityType = s.ActivityType, Name = s.Name, DataType = s.DataType }).ToList()
             }).ToList();
         }
     }

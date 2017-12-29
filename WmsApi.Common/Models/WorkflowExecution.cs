@@ -6,9 +6,9 @@ namespace WmsApi.Common.Models
     public partial class WorkflowExecution
     {
         public int Id { get; set; }
-        public int Workflow { get; set; }
+        public WorkFlow Workflow { get; set; }
         public double WorkflowVersion { get; set; }
-        public int UserStory { get; set; }
+        public WorkflowActivity UserStory { get; set; }
         public DateTime? StartDate { get; set; }
         public string Status { get; set; }
         public double? Progress { get; set; }
