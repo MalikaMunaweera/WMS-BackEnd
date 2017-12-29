@@ -10,7 +10,8 @@ namespace WmsApi.Common.Models
         public double Version { get; set; }
         public string Name { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public int? CreatedBy { get; set; }
+        public User CreatedBy { get; set; }
         public bool? IsActive { get; set; }
+        public ICollection<WorkflowActivity> Activities { get; set; }
     }
 }

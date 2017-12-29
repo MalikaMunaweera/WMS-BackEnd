@@ -15,40 +15,68 @@ namespace WmsApi.Controllers
             this.workFloor = workFloor;
         }
 
-        // GET api/values
+        // GET api/WorkFlows/GetWorkFlows
         [HttpGet]
         [Route("GetWorkFlows")]
-        public ICollection<WorkFlow> Get()
+        public ICollection<WorkFlow> GetWorkFlows()
         {
             return workFloor.GetWorkFlows();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        [Route("GetWorkFlowById")]
-        public string Get(int id)
+        // GET api/WorkFlows/GetWorkFlowsByStatus?isActive=true
+        [HttpGet("{isActive}")]
+        [Route("GetWorkFlowsByStatus")]
+        public ICollection<WorkFlow> GetWorkFlowsByStatus(bool isActive)
         {
-            return $"Work Floor {id}";
+            return workFloor.GetWorkFlowsByStatus(isActive);
         }
 
-        // POST api/values
+        // GET api/WorkFlows/GetActivityTypes
+        [HttpGet]
+        [Route("GetActivityTypes")]
+        public ICollection<ActivityType> GetActivityTypes()
+        {
+            return workFloor.GetActivityTypes();
+        }
+
+        // GET api/WorkFlows/GetWorkFlowById?id=5
+        [HttpGet("{id}")]
+        [Route("GetWorkFlowById")]
+        public WorkFlow GetWorkFlowById(int id)
+        {
+            return workFloor.GetWorkFlow(id);
+        }
+
+        // POST api/WorkFlows/AddWorkFlow
         [HttpPost]
         [Route("AddWorkFlow")]
-        public int Post([FromBody]WorkFlow value)
+        public int AddWorkFlow([FromBody]WorkFlow value)
         {
             return workFloor.AddWorkFlow(value);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        // POST api/WorkFlows/StartWorkFlowExecution
+        [HttpPost]
+        [Route("StartWorkFlowExecution")]
+        public int StartWorkFlowExecution([FromBody]WorkflowExecution value)
         {
+            return workFloor.StartWorkFlowExecution(value);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST api/WorkFlows/UpdateWorkFlowActivityFields
+        [HttpPost]
+        [Route("UpdateWorkFlowActivityFields")]
+        public void UpdateWorkFlowActivityFields([FromBody]ICollection<WorkflowActivity> value)
         {
+            workFloor.UpdateWorkFlowActivityFields(value);
+        }
+
+        // POST api/WorkFlows/UpdateWorkFlow
+        [HttpPost]
+        [Route("UpdateWorkFlow")]
+        public int UpdateWorkFlow([FromBody]WorkFlow value)
+        {
+            return workFloor.UpdateWorkFlow(value);
         }
     }
 }

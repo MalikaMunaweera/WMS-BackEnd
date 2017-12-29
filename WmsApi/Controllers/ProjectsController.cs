@@ -17,39 +17,20 @@ namespace WmsApi.Controllers
             this.project = project;
         }
 
-        // GET: api/values
+        // GET: api/Projects/GetProjects
         [HttpGet]
         [Route("GetProjects")]
         public ICollection<Project> Get()
         {
-            //var a = project.GetProjects();
             return project.GetProjects();
         }
 
-        // GET api/values/5
+        // GET api/Projects/GetProjectById?id=5
         [HttpGet("{id}")]
         [Route("GetProjectById")]
         public string Get(int id)
         {
             return $"Project {id}";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

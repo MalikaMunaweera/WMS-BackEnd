@@ -17,40 +17,44 @@ namespace WmsApi.Controllers
             this.userStory = userStory;
         }
 
-        // GET: api/values
+        // GET: api/UserStories/GetUserStories
         [HttpGet]
         [Route("GetUserStories")]
-        public ICollection<UserStory> Get()
+        public ICollection<UserStory> GetUserStories()
         {
             return userStory.GetUserStories();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        [Route("GetUserStoryById")]
-        public string Get(int id)
+        // GET: api/UserStories/GetUserStoriesByStatus?status=new
+        [HttpGet("{status}")]
+        [Route("GetUserStoriesByStatus")]
+        public ICollection<UserStory> GetUserStoriesByStatus(string status)
         {
-            return $"User Story {id}";
+            return userStory.GetUserStoriesByStatus(status);
         }
 
-        // POST api/values
+        // GET api/UserStories/GetUserStoryById?id=5
+        [HttpGet("{id}")]
+        [Route("GetUserStoryById")]
+        public UserStory GetUserStoryById(int id)
+        {
+            return userStory.GetUserStory(id);
+        }
+
+        // POST api/UserStories/AddUserStory
         [HttpPost]
         [Route("AddUserStory")]
-        public int Post([FromBody]UserStory value)
+        public int AddUserStory([FromBody]UserStory value)
         {
             return userStory.AddUserStory(value);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        // POST api/UserStories/UpdateUserStory
+        [HttpPost]
+        [Route("UpdateUserStory")]
+        public int UpdateUserStory([FromBody]UserStory value)
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return userStory.UpdateUserStory(value);
         }
     }
 }

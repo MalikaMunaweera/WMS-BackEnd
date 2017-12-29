@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace WmsApi
 {
     public class Program
     {
+        //Scaffold-DbContext "Data Source=192.168.8.101;Initial Catalog=WMS;Persist Security Info=True;User ID=sa;Password=38340677" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -Force
         public static void Main(string[] args)
         {
             BuildWebHost(args).Run();

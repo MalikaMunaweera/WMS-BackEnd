@@ -11,6 +11,6 @@ namespace WmsApi.Data.Entities
         public string Value { get; set; }
 
         public WorkflowActivity ActivityNavigation { get; set; }
-        public WorkflowActivityType TypeNavigation { get; set; }
+        public WorkflowActivityFieldType TypeNavigation { get; set; }
     }
 }

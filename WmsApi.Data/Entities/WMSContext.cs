@@ -24,7 +24,7 @@ namespace WmsApi.Data.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=WMS;Integrated Security=False;User ID=sa;Password=38340677;Connect Timeout=30;");
+                optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=WMS;Integrated Security=False;User ID=sa;Password=38340677");
             }
         }
 
@@ -165,7 +165,7 @@ namespace WmsApi.Data.Entities
                     .WithMany(p => p.WorkflowActivity)
                     .HasForeignKey(d => d.Type)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_WorkflowActivity_WorkflowActivityType");
+                    .HasConstraintName("FK_WorkflowActivityType_WorkflowActivityFieldType");
 
                 entity.HasOne(d => d.WorkflowNavigation)
                     .WithMany(p => p.WorkflowActivity)
@@ -227,6 +227,12 @@ namespace WmsApi.Data.Entities
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.ActivityTypeNavigation)
+                    .WithMany(p => p.WorkflowActivityFieldType)
+                    .HasForeignKey(d => d.ActivityType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_WorkflowActivityFieldType_WorkflowActivityType");
             });
 
             modelBuilder.Entity<WorkflowActivityType>(entity =>

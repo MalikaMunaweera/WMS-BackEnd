@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WmsApi.Business;
-using WmsApi.Common.Interfaces;
 using WmsApi.Data;
 using WmsApi.Data.Entities;
+using WmsApi.Common.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace WmsApi
 {
@@ -25,12 +27,17 @@ namespace WmsApi
             services.AddCors(o => o.AddPolicy("AllowOrigin", builder =>
             {
                 builder.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+                 .AllowCredentials();
             }));
 
             services.AddMvc();
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowOrigin"));
+            });
 
             services.AddScoped<DbContext, WMSContext>();
             services.AddScoped<IProjectBusiness, ProjectBusiness>();
@@ -50,6 +57,8 @@ namespace WmsApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowOrigin");
 
             app.UseMvc();
         }

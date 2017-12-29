@@ -8,13 +8,13 @@ namespace WmsApi.Data.Entities
         public WorkflowActivityType()
         {
             WorkflowActivity = new HashSet<WorkflowActivity>();
-            WorkflowActivityField = new HashSet<WorkflowActivityField>();
+            WorkflowActivityFieldType = new HashSet<WorkflowActivityFieldType>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<WorkflowActivity> WorkflowActivity { get; set; }
-        public ICollection<WorkflowActivityField> WorkflowActivityField { get; set; }
+        public ICollection<WorkflowActivityFieldType> WorkflowActivityFieldType { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace WmsApi.Controllers
             this.user = user;
         }
 
-        // GET: api/values
+        // GET: api/Users/GetUsers
         [HttpGet]
         [Route("GetUsers")]
         public ICollection<User> Get()
@@ -25,30 +25,12 @@ namespace WmsApi.Controllers
             return user.GetUsers();
         }
 
-        // GET api/values/5
+        // GET api/Users/GetUserByFirstName?firstName=Rose
         [HttpGet("{firstName}")]
         [Route("GetUserByFirstName")]
         public User Get(string firstName)
         {
             return user.GetUserByName(firstName);
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

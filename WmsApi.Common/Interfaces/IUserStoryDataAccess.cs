@@ -6,6 +6,9 @@ namespace WmsApi.Common.Interfaces
     public interface IUserStoryDataAccess
     {
         ICollection<UserStory> GetUserStories();
+        ICollection<UserStory> GetUserStoriesByStatus(string status);
+        UserStory GetUserStory(int id);
         int AddUserStory(UserStory userStrory);
+        int UpdateUserStory(UserStory userStrory);
     }
 }
